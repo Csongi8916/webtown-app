@@ -1,11 +1,13 @@
-import Masonry from "./Masonry";
-import masonryData from "../data/masonry";
+import Masonry from "./components/Masonry/Masonry";
+import Timeline from "./components/Timeline/Timeline";
+import data from "../data/masonry";
 
 function App() {
     return (
       <main>
         <h1>test text</h1>
-        <Masonry images={masonryData}></Masonry>
+        <Timeline posts={data} />
+        {/*<Masonry images={data} />*/}
       </main>
     );
   }
