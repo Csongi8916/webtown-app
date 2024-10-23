@@ -1,9 +1,12 @@
+import Masonry from "./Masonry";
+import masonryData from "../data/masonry";
+
 function App() {
     return (
-      <div>
-        <main>
-        </main>
-      </div>
+      <main>
+        <h1>test text</h1>
+        <Masonry images={masonryData}></Masonry>
+      </main>
     );
   }
   
