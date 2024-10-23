@@ -1,0 +1,12 @@
+hr {
+  width: 3px;
+  height: 20px;
+  display: block;
+  background-color: gray;
+  transform: rotate(90deg);
+}
+
+.cardContainer {
+  width: 80vw;
+  height: 35vh;
+}
