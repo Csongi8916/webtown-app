@@ -6,16 +6,60 @@ const CARD_WIDTH = 320;
 
 function Timeline({ posts }) {
   const scrollBarRef = useRef();
+  const count = useRef(0);
   const [ scrollPosition, setScrollPosition ] = useState(0);
 
-  useEffect(() => {
-    //scrollBarRef.current.scrollLeft = scrollPosition;
-  });
+  let isDesktop = window.innerWidth > 412;
+  let xDown, yDown = undefined;
   
   const handleScroll = (scrollAmount) => {
+    //if (count.current === 0 && scrollAmount > 0) return;
+    //if (count.current === posts.length && scrollAmount < 0) return;
     const newScrollPosition = scrollPosition + scrollAmount;
     setScrollPosition(newScrollPosition);
     scrollBarRef.current.scrollLeft = newScrollPosition;
+    scrollAmount > 0 ? count.current++ : count.current--;
+  }
+
+  const handleStartTouchScroll = (event) => {
+    // console.log('Touch Start');
+    xDown = event.touches[0].clientX;
+    yDown = event.touches[0].clientY;                                      
+  }
+
+  const handleMoveTouchScroll = (evt) => {
+    if ( ! xDown || ! yDown ) {
+      return;
+    }
+
+    var xUp = evt.touches[0].clientX;                                    
+    var yUp = evt.touches[0].clientY;
+
+    var xDiff = xDown - xUp;
+    var yDiff = yDown - yUp;
+                                                                        
+    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+        if ( xDiff > 0 ) {
+           console.log('Right Swipe');
+        } else {
+          console.log('Left Swipe');
+        }                       
+    } else {
+        if ( yDiff > 0 ) {
+            /* down swipe */ 
+        } else { 
+            /* up swipe */
+        }                                                                 
+    }
+    /* reset values */
+    xDown = null;
+    yDown = null;
+  }
+
+  const handleEndTouchScroll = (event) => {
+    // const touches = event.changedTouches;
+    // console.log('Touches: ', 'clientX: ' + touches[0].clientX, 'pageX: ' + touches[0].pageX, 'screenX: ' + touches[0].screenX);
+    handleScroll(-CARD_WIDTH);
   }
 
   return (
@@ -29,7 +73,7 @@ function Timeline({ posts }) {
           </a>
         </div>
         <hr />
-        <div className="d-flex">
+        {isDesktop && <div className="d-flex">
           <div className="me-auto">
             <button onClick={() => {handleScroll(CARD_WIDTH)}} className="m-2 btn btn-secondary">
               <i class="bi bi-arrow-right"></i>
@@ -38,37 +82,19 @@ function Timeline({ posts }) {
               <i class="bi bi-arrow-left"></i>
             </button>
           </div>
-        </div>
+        </div>}
       </header>
-      <div className={classes.scrollbar} ref={scrollBarRef}>
+      <div className={classes.scrollbar}
+        ref={scrollBarRef}
+        onTouchStart={handleStartTouchScroll}
+        onTouchMove={handleMoveTouchScroll}
+        onTouchEnd={handleEndTouchScroll}>
         {posts.map(imageData => (
             imageData.data.map(element => (
               <Card post={element} className={classes.card} />
             ))
         ))}
       </div>
-      {/*<div className={classes.container}>
-        <div ref={scrollBarRef} className={classes.scrollbar}>
-          <div className={classes.contentBbox}>
-            {posts.map(imageData => (
-               imageData.data.map(element => (
-                <Card post={element} className={classes.card} />
-               ))
-            ))}
-          </div>
-        </div>
-      </div>*/}
-      {/*<div className={classes.scrollbar} ref={scrollBar} data-bs-spy="scroll">
-        <Card post={posts[0].data[0]} />
-        <Card post={posts[0].data[1]} />
-        <Card post={posts[0].data[2]} />
-        <Card post={posts[0].data[3]} />
-        <Card post={posts[1].data[0]} />
-        <Card post={posts[0].data[0]} />
-        <Card post={posts[0].data[0]} />
-        <Card id="post" post={posts[0].data[0]} />
-        <div id="p"></div>
-      </div>*/}
     </div>
   );
 }

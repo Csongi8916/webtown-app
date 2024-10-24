@@ -1,7 +1,3 @@
-a {
-  transition: width 2s, height 4s;
-}
-
 .timeline {
   width: 1150px;
   margin: 100px;
@@ -12,6 +8,7 @@ a {
   display: flex;
   overflow-x: scroll;
   scroll-behavior: smooth;
+  touch-action: none;
 }
 
 .timeline .scrollbar .blur {
@@ -19,24 +16,4 @@ a {
   height: 100%;
   filter: blur(10px);
   backdrop-filter: blur(10px)
-}
-
-.container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-items: center;
-}
-
-.contentBbox {
-  width: 1800px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.card {
-  
 }
