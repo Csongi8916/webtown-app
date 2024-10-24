@@ -12,7 +12,6 @@ function Masonry({ images }) {
       <div className="d-flex">
         {images.map((imageData, index) => (
           <>
-          {console.log(index)}
           <div key={index} className="bd-highlight mb-3">
             {imageData.data.map(element => (
               <div className="p-1" key={element.id}

@@ -16,9 +16,9 @@ a:hover {
 }
 
 .cardContainer {
-  width: 30vw;
+  width: 0vw;
   height: 20vh;
-  min-width: 350px;
+  min-width: 300px;
   margin: 10px;
 }
 
