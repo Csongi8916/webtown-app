@@ -11,10 +11,11 @@ function Timeline({ posts }) {
 
   let isDesktop = window.innerWidth > 412;
   let xDown, yDown = undefined;
+  let isLeftTouch = undefined;
   
   const handleScroll = (scrollAmount) => {
-    //if (count.current === 0 && scrollAmount > 0) return;
-    //if (count.current === posts.length && scrollAmount < 0) return;
+    if (count.current === 0 && scrollAmount > 0) return;
+    if (count.current === posts.length && scrollAmount < 0) return;
     const newScrollPosition = scrollPosition + scrollAmount;
     setScrollPosition(newScrollPosition);
     scrollBarRef.current.scrollLeft = newScrollPosition;
@@ -22,7 +23,6 @@ function Timeline({ posts }) {
   }
 
   const handleStartTouchScroll = (event) => {
-    // console.log('Touch Start');
     xDown = event.touches[0].clientX;
     yDown = event.touches[0].clientY;                                      
   }
@@ -34,32 +34,28 @@ function Timeline({ posts }) {
 
     var xUp = evt.touches[0].clientX;                                    
     var yUp = evt.touches[0].clientY;
-
     var xDiff = xDown - xUp;
     var yDiff = yDown - yUp;
                                                                         
-    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {
         if ( xDiff > 0 ) {
-           console.log('Right Swipe');
+          console.log('Right Swipe');
+          isLeftTouch = false;
         } else {
           console.log('Left Swipe');
+          isLeftTouch = true;
         }                       
-    } else {
-        if ( yDiff > 0 ) {
-            /* down swipe */ 
-        } else { 
-            /* up swipe */
-        }                                                                 
     }
-    /* reset values */
     xDown = null;
     yDown = null;
   }
 
   const handleEndTouchScroll = (event) => {
-    // const touches = event.changedTouches;
-    // console.log('Touches: ', 'clientX: ' + touches[0].clientX, 'pageX: ' + touches[0].pageX, 'screenX: ' + touches[0].screenX);
-    handleScroll(-CARD_WIDTH);
+    if (isLeftTouch) {
+      handleScroll(-CARD_WIDTH);
+    } else {
+      handleScroll(CARD_WIDTH);
+    }
   }
 
   return (

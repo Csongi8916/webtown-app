@@ -6,7 +6,7 @@
 .timeline .scrollbar {
   height: 650px;
   display: flex;
-  overflow-x: scroll;
+  overflow-x: hidden;
   scroll-behavior: smooth;
   touch-action: none;
 }
