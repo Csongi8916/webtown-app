@@ -6,6 +6,13 @@ a {
   margin: 100px;
 }
 
-#list.item-1 {
-  transition: width 2s, height 4s;
+.timeline header {
+  display: flex;
+  overflow-x: scroll;
+}
+
+.timeline .scrollbar {
+  height: 60vh;
+  display: flex;
+  overflow-x: scroll;
 }

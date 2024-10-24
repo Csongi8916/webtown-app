@@ -7,7 +7,7 @@ function App() {
       <main>
         <h1>test text</h1>
         <Timeline posts={data} />
-        {/*<Masonry images={data} />*/}
+        <Masonry images={data} />
       </main>
     );
   }
