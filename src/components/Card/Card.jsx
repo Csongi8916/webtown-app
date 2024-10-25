@@ -1,6 +1,6 @@
 import classes from './Card.module.css';
 
-function Card({ post }) {
+function Card({ post, isRtl }) {
   return (
     <div className={classes.cardContainer}>
       <div className="card shadow ">
@@ -12,9 +12,9 @@ function Card({ post }) {
           <p className="card-text">{post.description}</p>
         </div>
         <div className="card-body">
-          <a href="#" className="card-link">
-            <span className="ms-2">View More</span>
-            <i className="bi bi-arrow-left"></i>
+        <a href="#" className={isRtl ? "me-auto" : "ms-auto"}>
+            {isRtl ? <i className="bi bi-arrow-right"></i> : <i className="bi bi-arrow-left"></i>}
+            <span className="m-2">View All</span>
           </a>
         </div>
       </div>

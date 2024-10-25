@@ -1,20 +1,28 @@
-import { useEffect, useRef, useState, memo } from "react";
+import { useRef, useState, memo } from "react";
 import Card from '../Card/Card';
 import classes from './Timeline.module.css';
 
 const CARD_WIDTH = 320;
 
-function Timeline({ posts, isDesktop }) {
+function Timeline({ posts, isDesktop, isRtl }) {
   const scrollBarRef = useRef();
   const count = useRef(0);
   const [ scrollPosition, setScrollPosition ] = useState(0);
 
-  let xDown, yDown = undefined;
-  let isLeftTouch = undefined;
+  let xDown, yDown, isLeftTouch;
+
+  const validateScroll = (scrollAmount) => {
+    if (isRtl) {
+      if (count.current === 0 && scrollAmount > 0) return;
+      if (count.current === posts.length && scrollAmount < 0) return;
+    } else {
+      if (count.current === 0 && scrollAmount < 0) return;
+      if (count.current === posts.length && scrollAmount > 0) return;
+    }
+  }
   
   const handleScroll = (scrollAmount) => {
-    if (count.current === 0 && scrollAmount > 0) return;
-    if (count.current === posts.length && scrollAmount < 0) return;
+    validateScroll(scrollAmount);
     const newScrollPosition = scrollPosition + scrollAmount;
     setScrollPosition(newScrollPosition);
     scrollBarRef.current.scrollLeft = newScrollPosition;
@@ -27,7 +35,7 @@ function Timeline({ posts, isDesktop }) {
   }
 
   const handleMoveTouchScroll = (evt) => {
-    if ( ! xDown || ! yDown ) {
+    if (!xDown || !yDown) {
       return;
     }
     let xUp = evt.touches[0].clientX;                                    
@@ -35,8 +43,8 @@ function Timeline({ posts, isDesktop }) {
     let xDiff = xDown - xUp;
     let yDiff = yDown - yUp;
                                                                         
-    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {
-        if ( xDiff > 0 ) {
+    if (Math.abs(xDiff) > Math.abs(yDiff) ) {
+        if (xDiff > 0) {
           isLeftTouch = false;
         } else {
           isLeftTouch = true;
@@ -59,21 +67,32 @@ function Timeline({ posts, isDesktop }) {
       <header className={classes.header}>
         <div className="d-flex">
           <h2 className={classes.title}>Financial sector development timeline</h2>
-          <a href="#" className="me-auto">
-            <span className="ms-2">View All</span>
-            <i className="bi bi-arrow-left"></i>
+          <a href="#" className={isRtl ? "me-auto" : "ms-auto"}>
+            {isRtl ? <i className="bi bi-arrow-right"></i> : <i className="bi bi-arrow-left"></i>}
+            <span className="m-2">View All</span>
           </a>
         </div>
         <hr />
         {isDesktop && <div className="d-flex">
-          <div className="me-auto">
-            <button onClick={() => {handleScroll(CARD_WIDTH)}} className="m-2 btn btn-secondary">
-              <i className="bi bi-arrow-right"></i>
-            </button>
-            <button onClick={() => {handleScroll(-CARD_WIDTH)}} className="btn btn-secondary">
-              <i className="bi bi-arrow-left"></i>
-            </button>
-          </div>
+          {isRtl ? (
+            <div className="me-auto">
+              <button onClick={() => {handleScroll(CARD_WIDTH)}} className="m-2 btn btn-secondary">
+                <i className="bi bi-arrow-right"></i>
+              </button>
+              <button onClick={() => {handleScroll(-CARD_WIDTH)}} className="btn btn-secondary">
+                <i className="bi bi-arrow-left"></i>
+              </button>
+            </div>
+          ) : (
+            <div className="ms-auto">
+              <button onClick={() => {handleScroll(-CARD_WIDTH)}} className="m-2 btn btn-secondary">
+                <i className="bi bi-arrow-left"></i>
+              </button>
+              <button onClick={() => {handleScroll(CARD_WIDTH)}} className="btn btn-secondary">
+                <i className="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          )}
         </div>}
       </header>
       <div className={classes.scrollbar}
@@ -82,7 +101,7 @@ function Timeline({ posts, isDesktop }) {
         onTouchMove={handleMoveTouchScroll}
         onTouchEnd={handleEndTouchScroll}>
         {posts.map(post => (
-          <Card post={post} className={classes.card} />
+          <Card post={post} isRtl={isRtl} className={classes.card} />
         ))}
       </div>
     </div>

@@ -21,6 +21,10 @@ a:hover {
   background-color: black;
 }
 
+[dir="ltr"] .cardContainer .cardHr {
+  left: 30px;
+}
+
 .cardImage {
   width: 100%;
   height: 200px;

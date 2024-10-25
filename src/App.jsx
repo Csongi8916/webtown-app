@@ -29,7 +29,7 @@ function App() {
           Change Language
         </button>
         <RtlToggle isRtl={isRtl} />
-        <Timeline posts={data.elements} isDesktop={isDesktop} />
+        <Timeline posts={data.elements} isDesktop={isDesktop}  isRtl={isRtl} />
         {isDesktop ? (
           <MasonryDesktop data={masonryData} isDesktop={isDesktop} />
         ) : (

@@ -10,13 +10,6 @@
   touch-action: none;
 }
 
-.timeline .scrollbar .blur {
-  width: 30px;
-  height: 100%;
-  filter: blur(10px);
-  backdrop-filter: blur(10px)
-}
-
 @media screen and (max-width: 412px) {
   .timeline {
     width: 90vw;
