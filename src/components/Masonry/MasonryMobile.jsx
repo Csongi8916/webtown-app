@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 function MasonryMobile({ data }) {
   const firstColumn = [], secondColumn = [];
   let logic = true;
@@ -38,4 +40,4 @@ function MasonryMobile({ data }) {
   );
 }
 
-export default MasonryMobile;
+export default memo(MasonryMobile);

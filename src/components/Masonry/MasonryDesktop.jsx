@@ -1,3 +1,4 @@
+import { memo } from "react";
 import classes from './MasonryDesktop.module.css';
 
 function MasonryDesktop({ data }) {
@@ -20,4 +21,4 @@ function MasonryDesktop({ data }) {
   );
 }
 
-export default MasonryDesktop;
+export default memo(MasonryDesktop);

@@ -102,7 +102,7 @@ function Timeline({ posts, isDesktop, isRtl }) {
         onTouchMove={handleMoveTouchScroll}
         onTouchEnd={handleEndTouchScroll}>
         {posts.map(post => (
-          <Card post={post} isRtl={isRtl} className={classes.card} />
+          <Card post={post} key={post.id} isRtl={isRtl} className={classes.card} />
         ))}
       </div>
     </div>
