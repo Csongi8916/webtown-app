@@ -13,16 +13,17 @@ function Timeline({ posts, isDesktop, isRtl }) {
 
   const validateScroll = (scrollAmount) => {
     if (isRtl) {
-      if (count.current === 0 && scrollAmount > 0) return;
-      if (count.current === posts.length && scrollAmount < 0) return;
+      if (count.current === 0 && scrollAmount > 0) return false;
+      if (count.current === posts.length && scrollAmount < 0) return false;
     } else {
-      if (count.current === 0 && scrollAmount < 0) return;
-      if (count.current === posts.length && scrollAmount > 0) return;
+      if (count.current === 0 && scrollAmount < 0) return false;
+      if (count.current === posts.length && scrollAmount > 0) return false;
     }
+    return true;
   }
   
   const handleScroll = (scrollAmount) => {
-    validateScroll(scrollAmount);
+    if (!validateScroll(scrollAmount)) return;
     const newScrollPosition = scrollPosition + scrollAmount;
     setScrollPosition(newScrollPosition);
     scrollBarRef.current.scrollLeft = newScrollPosition;
