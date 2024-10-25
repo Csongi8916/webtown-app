@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet";
 
-function RtlToggleRender({ isRtl }) {
+function RtlToggle({ isRtl }) {
   return (
     <>
       {isRtl ? (
@@ -16,4 +16,4 @@ function RtlToggleRender({ isRtl }) {
   );
 }
 
-export default RtlToggleRender;
+export default RtlToggle;

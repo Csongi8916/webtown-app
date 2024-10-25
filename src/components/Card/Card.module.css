@@ -6,20 +6,19 @@ a:hover {
   text-decoration: underline;
 }
 
-.cardHr {
+.cardContainer {
+  height: 20vh;
+  min-width: 300px;
+  margin: 10px;
+}
+
+.cardContainer .cardHr {
   width: 2px;
-  height: 80px !important;
+  height: 80px;
   display: block;
   position: relative;
   left: -30px;
   background-color: black;
-}
-
-.cardContainer {
-  width: 0vw;
-  height: 20vh;
-  min-width: 300px;
-  margin: 10px;
 }
 
 .cardImage {
@@ -30,4 +29,34 @@ a:hover {
 .date {
   position: relative;
   top: 100px;
+}
+
+@media screen and (max-width: 412px) {
+
+  .cardContainer {
+    height: 350px;
+    width: 95vw;
+  }
+
+  .cardContainer .cardHr {
+    height: 20px;
+  }
+
+  .cardContainer .cardImage {
+    height: 150px;
+    font-size: 13px;
+  }
+
+  .cardContainer h5 {
+    font-size: 15px;
+  }
+
+  .cardContainer p, .cardContainer a span {
+    font-size: 13px;
+  }
+
+  .cardContainer .date {
+    top: 45px;
+  }
+
 }

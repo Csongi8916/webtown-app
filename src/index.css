@@ -18,3 +18,17 @@ body {
   -webkit-text-size-adjust: 100%;
   min-height: 80rem;
 }
+
+.app {
+  margin: 40px;
+}
+
+@media screen and (max-width: 412px) {
+  .app {
+    width: 100vw;
+    height: 100vh;
+    margin: 2px;
+  }
+}
+
+
