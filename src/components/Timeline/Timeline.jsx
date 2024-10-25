@@ -9,7 +9,7 @@ function Timeline({ posts }) {
   const count = useRef(0);
   const [ scrollPosition, setScrollPosition ] = useState(0);
 
-  let isDesktop = window.innerWidth > 412;
+  let isDesktop = window.innerWidth >= 412;
   let xDown, yDown = undefined;
   let isLeftTouch = undefined;
   
@@ -31,11 +31,10 @@ function Timeline({ posts }) {
     if ( ! xDown || ! yDown ) {
       return;
     }
-
-    var xUp = evt.touches[0].clientX;                                    
-    var yUp = evt.touches[0].clientY;
-    var xDiff = xDown - xUp;
-    var yDiff = yDown - yUp;
+    let xUp = evt.touches[0].clientX;                                    
+    let yUp = evt.touches[0].clientY;
+    let xDiff = xDown - xUp;
+    let yDiff = yDown - yUp;
                                                                         
     if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {
         if ( xDiff > 0 ) {
@@ -62,20 +61,20 @@ function Timeline({ posts }) {
     <div className={classes.timeline}>
       <header className={classes.header}>
         <div className="d-flex">
-          <h2>Financial sector development timeline</h2>
+          <h2 className={classes.title}>Financial sector development timeline</h2>
           <a href="#" className="me-auto">
             <span className="ms-2">View All</span>
-            <i class="bi bi-arrow-left"></i>
+            <i className="bi bi-arrow-left"></i>
           </a>
         </div>
         <hr />
         {isDesktop && <div className="d-flex">
           <div className="me-auto">
             <button onClick={() => {handleScroll(CARD_WIDTH)}} className="m-2 btn btn-secondary">
-              <i class="bi bi-arrow-right"></i>
+              <i className="bi bi-arrow-right"></i>
             </button>
             <button onClick={() => {handleScroll(-CARD_WIDTH)}} className="btn btn-secondary">
-              <i class="bi bi-arrow-left"></i>
+              <i className="bi bi-arrow-left"></i>
             </button>
           </div>
         </div>}
@@ -86,9 +85,9 @@ function Timeline({ posts }) {
         onTouchMove={handleMoveTouchScroll}
         onTouchEnd={handleEndTouchScroll}>
         {posts.map(imageData => (
-            imageData.data.map(element => (
-              <Card post={element} className={classes.card} />
-            ))
+          imageData.data.map(element => (
+            <Card post={element} className={classes.card} />
+          ))
         ))}
       </div>
     </div>
