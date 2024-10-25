@@ -4,12 +4,11 @@ import classes from './Timeline.module.css';
 
 const CARD_WIDTH = 320;
 
-function Timeline({ posts }) {
+function Timeline({ posts, isDesktop }) {
   const scrollBarRef = useRef();
   const count = useRef(0);
   const [ scrollPosition, setScrollPosition ] = useState(0);
 
-  let isDesktop = window.innerWidth >= 412;
   let xDown, yDown = undefined;
   let isLeftTouch = undefined;
   
@@ -38,10 +37,8 @@ function Timeline({ posts }) {
                                                                         
     if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {
         if ( xDiff > 0 ) {
-          console.log('Right Swipe');
           isLeftTouch = false;
         } else {
-          console.log('Left Swipe');
           isLeftTouch = true;
         }                       
     }
@@ -84,10 +81,8 @@ function Timeline({ posts }) {
         onTouchStart={handleStartTouchScroll}
         onTouchMove={handleMoveTouchScroll}
         onTouchEnd={handleEndTouchScroll}>
-        {posts.map(imageData => (
-          imageData.data.map(element => (
-            <Card post={element} className={classes.card} />
-          ))
+        {posts.map(post => (
+          <Card post={post} className={classes.card} />
         ))}
       </div>
     </div>

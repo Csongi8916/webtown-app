@@ -10,9 +10,8 @@ import img009 from '../assets/009.jpg';
 import img010 from '../assets/010.jpg';
 import img011 from '../assets/011.jpg';
 
-const data = [
+const masonryData = [
   {
-    maxHeight: 70,
     data: [
       { id: 1, title:'Lorem Ipsum', image: img010, height: 250, date: '2025 July', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec eros vel augue varius tempus.' },
       { id: 2, title:'Lorem Ipsum', image: img003, height: 100, date: '2025 June', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec eros vel augue varius tempus.' },
@@ -55,4 +54,4 @@ const data = [
   },
 ];
 
-export default data;
+export default masonryData;

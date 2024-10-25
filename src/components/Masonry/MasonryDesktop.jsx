@@ -1,10 +1,10 @@
-import classes from './Masonry.module.css';
+import classes from './MasonryDesktop.module.css';
 
-function Masonry({ images }) {
+function MasonryDesktop({ data }) {
   return (
     <div className={classes.container}>
-      {images.map((imageData, index) => (
-        <div key={index} >
+      {data.toReversed().map((imageData, index) => (
+        <div key={index}>
           {imageData.data.map(element => (
             <div className="p-1" key={element.id}
               style={{height: `${element.height}px`,
@@ -20,4 +20,4 @@ function Masonry({ images }) {
   );
 }
 
-export default Masonry;
+export default MasonryDesktop;
