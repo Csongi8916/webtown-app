@@ -20,7 +20,10 @@ function Card({ post, isRtl }) {
       </div>
       <div className="d-flex justify-content-center">
         <hr className={classes.cardHr} />
-        <p className={classes.date}>{post.date}</p>
+        <div className={classes.date}>
+          <p className="mb-1">{post.year}</p>
+          <p>{post.month}</p>
+        </div>
       </div>
     </div>
   );

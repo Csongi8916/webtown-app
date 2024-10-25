@@ -33,6 +33,11 @@ a:hover {
 .date {
   position: relative;
   top: 100px;
+  left: -15px;
+}
+
+[dir="ltr"] .date {
+  left: 15px;
 }
 
 @media screen and (max-width: 412px) {
